@@ -19,7 +19,7 @@ export default function AuthButton() {
         } = await supabase.auth.getUser();
         setUser(fetchedUsed);
       } catch (error) {
-        console.log(error)
+        return
       }
       setIsLoading(false);
     }
@@ -28,7 +28,6 @@ export default function AuthButton() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    console.log('cc');
     return redirect("/login");
   };
 
