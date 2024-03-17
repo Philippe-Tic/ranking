@@ -10,22 +10,21 @@ export default function AuthButton() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchUser = async () => {
-    setIsLoading(true);
-    try {
-      const {
-        data: { user: fetchedUsed },
-      } = await supabase.auth.getUser();
-      setUser(fetchedUsed);
-    } catch (error) {
-      console.log(error)
-    }
-    setIsLoading(false);
-  }
-
   useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const {
+          data: { user: fetchedUsed },
+        } = await supabase.auth.getUser();
+        setUser(fetchedUsed);
+      } catch (error) {
+        console.log(error)
+      }
+      setIsLoading(false);
+    }
     fetchUser();
-  }, [])
+  }, [supabase.auth])
 
   const signOut = async () => {
     await supabase.auth.signOut();

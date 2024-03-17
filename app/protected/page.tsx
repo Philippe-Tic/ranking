@@ -38,23 +38,24 @@ export default function ProtectedPage() {
   const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUser = async () => {
-    setIsLoading(true);
-    try {
-      const {
-        data: { user: fetchedUsed },
-      } = await supabase.auth.getUser();
-      console.log({ fetchedUsed })
-      setUser(fetchedUsed);
-    } catch (error) {
-      console.log(error)
-    }
-    setIsLoading(false);
-  }
 
   useEffect(() => {
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        const {
+          data: { user: fetchedUsed },
+        } = await supabase.auth.getUser();
+        console.log({ fetchedUsed })
+        setUser(fetchedUsed);
+      } catch (error) {
+        console.log(error)
+      }
+      setIsLoading(false);
+    }
+
     fetchUser();
-  }, [])
+  }, [supabase.auth])
 
   if (!user && !isLoading) {
     return redirect("/login");

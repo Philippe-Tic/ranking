@@ -4,18 +4,18 @@ export default function ConnectSupabaseSteps() {
   return (
     <ol className="flex flex-col gap-6">
       <Step title="Create Supabase project">
-        <p>
-          Head over to{" "}
-          <a
-            href="https://app.supabase.com/project/_/settings/api"
-            target="_blank"
-            className="font-bold hover:underline text-foreground/80"
-            rel="noreferrer"
-          >
-            database.new
-          </a>{" "}
+          <p>
+            Head over to{" "}
+            <a
+              href="https://app.supabase.com/project/_/settings/api"
+              target="_blank"
+              className="font-bold hover:underline text-foreground/80"
+              rel="noreferrer"
+            >
+              database.new
+            </a>{" "}
           and create a new Supabase project.
-        </p>
+          </p>
       </Step>
 
       <Step title="Declare environment variables">
