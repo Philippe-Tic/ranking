@@ -28,6 +28,7 @@ export default function AuthButton() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    console.log('cc');
     return redirect("/login");
   };
 

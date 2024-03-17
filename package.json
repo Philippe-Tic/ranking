@@ -8,7 +8,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx}": "next lint ./app"
+    "*.{ts,tsx,js,jsx}": "next lint"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
