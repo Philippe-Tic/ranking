@@ -17,7 +17,7 @@ export const SortableItem = (props: any) => {
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-        {props.children}
+      {props.children}
     </div>
   );
 }

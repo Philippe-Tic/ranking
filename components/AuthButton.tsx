@@ -1,5 +1,3 @@
-"use client";
-
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -34,10 +32,10 @@ export default function AuthButton() {
   if (isLoading) return (<div>Loading...</div>);
 
   return user ? (
-    <div className="flex items-center gap-4">
+    <div>
       Hey, {user?.user_metadata?.full_name || user?.email}!
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline bg-btn-background hover:bg-btn-background-hover">
+        <button>
           Logout
         </button>
       </form>
@@ -45,7 +43,6 @@ export default function AuthButton() {
   ) : (
     <Link
       href="/login"
-      className="py-2 px-3 flex rounded-md no-underline bg-btn-background hover:bg-btn-background-hover"
     >
       Login
     </Link>
