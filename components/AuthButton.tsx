@@ -1,3 +1,4 @@
+import { useUserContext } from "@/app/layout";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -5,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function AuthButton() {
   const supabase = createClient();
-  const [user, setUser] = useState<any>(null);
+  const { user, setUser } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function AuthButton() {
         const {
           data: { user: fetchedUsed },
         } = await supabase.auth.getUser();
-        setUser(fetchedUsed);
       } catch (error) {
         return
       }
@@ -26,6 +26,7 @@ export default function AuthButton() {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    setUser(null);
     return redirect("/login");
   };
 
@@ -35,7 +36,7 @@ export default function AuthButton() {
     <div>
       Hey, {user?.user_metadata?.full_name || user?.email}!
       <form action={signOut}>
-        <button>
+        <button className="btn btn-primary">
           Logout
         </button>
       </form>
@@ -43,6 +44,7 @@ export default function AuthButton() {
   ) : (
     <Link
       href="/login"
+      className="btn btn-primary"
     >
       Login
     </Link>

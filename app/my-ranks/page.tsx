@@ -1,5 +1,6 @@
 "use client"
-import { SortableItem } from "@/app/protected/SortableItem";
+import { useUserContext } from "@/app/layout";
+import { SortableItem } from "@/app/my-ranks/SortableItem";
 import AuthButton from "@/components/AuthButton";
 import { createClient } from "@/utils/supabase/client";
 import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core";
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 
 
 export default function ProtectedPage() {
+  const { user, setUser } = useUserContext();
   const supabase = createClient();
   const [items, setItems] = useState([1, 2, 3]);
   const sensors = useSensors(
@@ -31,10 +33,7 @@ export default function ProtectedPage() {
     }
   }
 
-
-  const [user, setUser] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
-
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -51,7 +50,7 @@ export default function ProtectedPage() {
     };
 
     fetchUser();
-  }, [supabase.auth]);
+  }, [supabase.auth, setUser]);
 
   if (!user && !isLoading) {
     return redirect("/login");

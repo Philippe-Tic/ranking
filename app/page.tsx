@@ -6,7 +6,7 @@ export default function Index() {
   return (
     <div>
       <nav>
-        <div>
+        <div className="text-3xl hover:text-2xl font-bold underline">
           <AuthButton />
         </div>
       </nav>
